@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Header = () => {
-    const isUserLoggedIn = true;
+  const { data: session } = useSession();
+
 
     const [providers, setProviders] = useState()
     const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -29,7 +30,7 @@ const Header = () => {
 
             {/* Desktop Navigation  */}
             <div className="sm:flex hidden">
-                {isUserLoggedIn ? (
+                {session?.user ? (
                     <div className="flex gap-3 md:gap-5">
                         <Link href="/create-prompt" className="black_btn">
                             Create Prompt
@@ -39,8 +40,8 @@ const Header = () => {
                             Sign Out
                         </button>
                         <Link href="/profile" >
-                            <Image src="/assets/images/logo.svg"
-                                alt="Profile" className="object-contain rounded-full"
+                            <Image src={session?.user?.image}
+                                alt="Profile" className="object-contain bg-black border-2 border-gray-700 rounded-full"
                                 width={37} height={37} />
 
                         </Link>
@@ -63,12 +64,12 @@ const Header = () => {
 
             {/* Mobile Navigation  */}
             <div className="sm:hidden flex relative">
-                {isUserLoggedIn ? (
+                {session?.user ? (
                     <div className="flex ">
 
 
-                        <Image src="/assets/images/logo.svg"
-                            alt="Profile" className="object-contain rounded-full cursor-pointer"
+<Image src={session?.user?.image}
+                            alt="Profile" className="object-contain rounded-full cursor-pointer bg-black border-2 border-gray-500"
                             width={37} height={37}   onClick={() => setToggleDropdown((prev) => !prev)} />
  {toggleDropdown && (
               <div className='dropdown'>
