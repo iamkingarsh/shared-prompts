@@ -1,4 +1,5 @@
 import Feed from '@components/Feed'
+import Link from 'next/link'
 import React from 'react'
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
       </span>
     </h1>
     <p className='desc text-center'>
-      Discover & Share Prompts AI-Powered Prompts 
+      Discover & Share Prompts for Chat-GPT. Built by <Link href="https://mohammedarshad.com">Mohammed Arshad</Link> 
     </p>
     <Feed/> 
   </section>
